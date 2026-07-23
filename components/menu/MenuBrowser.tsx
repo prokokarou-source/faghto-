@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { filterItemsByTags, type MenuItem } from '@/lib/menu/filter-items'
+import { RequestButtons } from '@/components/menu/RequestButtons'
 
 type MenuCategory = {
   id: string
@@ -12,10 +13,12 @@ type MenuCategory = {
 export function MenuBrowser({
   restaurantName,
   tableLabel,
+  qrToken,
   categories,
 }: {
   restaurantName: string
   tableLabel: string | null
+  qrToken: string | null
   categories: MenuCategory[]
 }) {
   const allTags = useMemo(() => {
@@ -35,7 +38,7 @@ export function MenuBrowser({
   }
 
   return (
-    <main className="mx-auto max-w-2xl p-6">
+    <main className="mx-auto max-w-2xl p-6 pb-28">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-gray-900">{restaurantName}</h1>
         {tableLabel && <p className="mt-1 text-sm text-gray-500">Τραπέζι {tableLabel}</p>}
@@ -87,6 +90,8 @@ export function MenuBrowser({
           </section>
         )
       })}
+
+      {qrToken && <RequestButtons qrToken={qrToken} />}
     </main>
   )
 }
