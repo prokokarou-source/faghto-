@@ -60,7 +60,19 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: StaffR
     if (status === 'resolved') {
       patch.resolved_at = new Date().toISOString()
     }
-    await supabase.from('requests').update(patch).eq('id', id)
+
+    const { error } = await supabase.from('requests').update(patch).eq('id', id)
+
+    if (error) {
+      console.error('Failed to update request:', error.message)
+      return
+    }
+
+    setRequests((current) =>
+      status === 'resolved'
+        ? current.filter((request) => request.id !== id)
+        : current.map((request) => (request.id === id ? { ...request, status } : request))
+    )
   }
 
   if (requests.length === 0) {
