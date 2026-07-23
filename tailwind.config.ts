@@ -7,7 +7,14 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        cream: '#fdfaf7',
+        terracotta: '#c1662f',
+        ink: '#2a2521',
+        sand: '#f0e4da',
+      },
+    },
   },
   plugins: [],
 }

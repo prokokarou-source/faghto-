@@ -38,22 +38,26 @@ export function MenuBrowser({
   }
 
   return (
-    <main className="mx-auto max-w-2xl p-6 pb-28">
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900">{restaurantName}</h1>
-        {tableLabel && <p className="mt-1 text-sm text-gray-500">Τραπέζι {tableLabel}</p>}
+    <main className="mx-auto max-w-lg bg-cream p-6 pb-28 font-serif">
+      <header className="mb-6 text-center">
+        <h1 className="text-3xl font-semibold text-ink">{restaurantName}</h1>
+        {tableLabel && (
+          <p className="mt-1 text-xs uppercase tracking-widest text-terracotta">
+            Τραπέζι {tableLabel}
+          </p>
+        )}
       </header>
 
       {allTags.length > 0 && (
-        <div className="mb-6 flex flex-wrap gap-2">
+        <div className="mb-6 flex flex-wrap justify-center gap-2">
           {allTags.map((tag) => (
             <button
               key={tag}
               onClick={() => toggleTag(tag)}
-              className={`rounded-full border px-3 py-1 text-sm ${
+              className={`rounded-full border px-3 py-1 text-xs ${
                 selectedTags.includes(tag)
-                  ? 'border-gray-900 bg-gray-900 text-white'
-                  : 'border-gray-300 text-gray-700'
+                  ? 'border-terracotta bg-terracotta text-white'
+                  : 'border-gray-300 text-gray-500'
               }`}
             >
               {tag}
@@ -67,21 +71,23 @@ export function MenuBrowser({
         if (items.length === 0) return null
 
         return (
-          <section key={category.id} className="mb-8">
-            <h2 className="mb-3 text-lg font-semibold text-gray-900">{category.name}</h2>
-            <ul className="space-y-4">
+          <section key={category.id} className="mb-6">
+            <h2 className="mb-3 border-b-2 border-sand pb-2 text-xs font-bold uppercase tracking-widest text-terracotta">
+              {category.name}
+            </h2>
+            <ul>
               {items.map((item) => (
-                <li key={item.id} className="flex justify-between gap-4">
+                <li key={item.id} className="flex justify-between gap-4 border-b border-sand py-3.5">
                   <div>
-                    <p className="font-medium text-gray-900">{item.name}</p>
+                    <p className="text-base font-semibold text-ink">{item.name}</p>
                     {item.description && (
-                      <p className="text-sm text-gray-600">{item.description}</p>
+                      <p className="mt-0.5 text-sm text-gray-500">{item.description}</p>
                     )}
                     {item.tags.length > 0 && (
-                      <p className="mt-1 text-xs text-gray-400">{item.tags.join(', ')}</p>
+                      <p className="mt-1 text-xs text-terracotta">{item.tags.join(', ')}</p>
                     )}
                   </div>
-                  <p className="whitespace-nowrap font-medium text-gray-900">
+                  <p className="whitespace-nowrap font-bold text-ink">
                     {item.price.toFixed(2)}&nbsp;€
                   </p>
                 </li>

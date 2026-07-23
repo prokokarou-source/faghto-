@@ -36,19 +36,23 @@ export function RequestButtons({ qrToken }: { qrToken: string }) {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 border-t border-gray-200 bg-white p-4">
+    <div className="fixed inset-x-0 bottom-0 border-t border-sand bg-white p-4 font-serif">
       {error && <p className="mb-2 text-center text-sm text-red-600">{error}</p>}
-      <div className="mx-auto flex max-w-2xl gap-3">
-        {(['call_waiter', 'bill'] as const).map((type) => (
-          <button
-            key={type}
-            onClick={() => sendRequest(type)}
-            disabled={sentType === type}
-            className="flex-1 rounded bg-gray-900 py-3 text-white disabled:opacity-50"
-          >
-            {sentType === type ? 'Ζητήθηκε!' : REQUEST_LABELS[type]}
-          </button>
-        ))}
+      <div className="mx-auto flex max-w-lg gap-3">
+        <button
+          onClick={() => sendRequest('call_waiter')}
+          disabled={sentType === 'call_waiter'}
+          className="flex-1 rounded-xl bg-terracotta py-3.5 font-semibold text-white disabled:opacity-50"
+        >
+          {sentType === 'call_waiter' ? 'Ζητήθηκε!' : REQUEST_LABELS.call_waiter}
+        </button>
+        <button
+          onClick={() => sendRequest('bill')}
+          disabled={sentType === 'bill'}
+          className="flex-1 rounded-xl bg-ink py-3.5 font-semibold text-white disabled:opacity-50"
+        >
+          {sentType === 'bill' ? 'Ζητήθηκε!' : REQUEST_LABELS.bill}
+        </button>
       </div>
     </div>
   )
