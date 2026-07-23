@@ -1,10 +1,17 @@
-export default function StaffDashboardPage() {
+import { getStaffRole } from '@/lib/auth/get-staff-role'
+import { getRestaurantRequests } from '@/lib/requests/get-restaurant-requests'
+import { RequestsDashboard } from '@/components/staff/RequestsDashboard'
+
+export default async function StaffDashboardPage() {
+  const staff = await getStaffRole()
+  const requests = staff ? await getRestaurantRequests(staff.restaurantId) : []
+
   return (
     <main className="p-8">
       <h1 className="text-xl font-semibold text-gray-900">Πίνακας σερβιτόρου</h1>
-      <p className="mt-2 text-gray-600">
-        Εδώ θα εμφανίζονται οι ζωντανές ειδοποιήσεις τραπεζιών (έρχεται στη Φάση 3).
-      </p>
+      <div className="mt-6">
+        <RequestsDashboard initialRequests={requests} />
+      </div>
     </main>
   )
 }
