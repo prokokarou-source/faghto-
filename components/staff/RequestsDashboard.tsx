@@ -36,7 +36,13 @@ async function fetchOpenRequests(): Promise<StaffRequest[]> {
   }))
 }
 
-export function RequestsDashboard({ initialRequests }: { initialRequests: StaffRequest[] }) {
+export function RequestsDashboard({
+  initialRequests,
+  staffId,
+}: {
+  initialRequests: StaffRequest[]
+  staffId: string
+}) {
   const [requests, setRequests] = useState(initialRequests)
 
   useEffect(() => {
@@ -56,7 +62,7 @@ export function RequestsDashboard({ initialRequests }: { initialRequests: StaffR
 
   async function updateStatus(id: string, status: 'acknowledged' | 'resolved') {
     const supabase = createClient()
-    const patch: { status: string; resolved_at?: string } = { status }
+    const patch: { status: string; resolved_at?: string; handled_by: string } = { status, handled_by: staffId }
     if (status === 'resolved') {
       patch.resolved_at = new Date().toISOString()
     }

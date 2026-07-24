@@ -10,7 +10,7 @@ export default async function StaffDashboardPage() {
     <main className="p-8">
       <h1 className="text-xl font-semibold text-gray-900">Πίνακας σερβιτόρου</h1>
       <div className="mt-6">
-        <RequestsDashboard initialRequests={requests} />
+        <RequestsDashboard initialRequests={requests} staffId={staff?.id ?? ''} />
       </div>
     </main>
   )

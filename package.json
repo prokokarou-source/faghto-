@@ -9,7 +9,8 @@
     "test": "vitest run",
     "seed": "tsx scripts/seed.ts",
     "seed:menu": "tsx scripts/seed-menu.ts",
-    "seed:tables": "tsx scripts/seed-tables.ts"
+    "seed:tables": "tsx scripts/seed-tables.ts",
+    "reseed:brunch-menu": "tsx scripts/reseed-brunch-menu.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

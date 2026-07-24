@@ -24,9 +24,10 @@ export async function inviteStaff(
 
   const email = String(formData.get('email') ?? '').trim()
   const role = String(formData.get('role') ?? '')
+  const displayName = String(formData.get('displayName') ?? '').trim()
 
-  if (!email || (role !== 'admin' && role !== 'waiter')) {
-    return { error: 'Συμπλήρωσε έγκυρο email και ρόλο.' }
+  if (!email || !displayName || (role !== 'admin' && role !== 'waiter')) {
+    return { error: 'Συμπλήρωσε όνομα, έγκυρο email και ρόλο.' }
   }
 
   const { url } = getSupabaseEnv()
@@ -52,6 +53,7 @@ export async function inviteStaff(
     restaurant_id: staff.restaurantId,
     auth_user_id: authUser.user.id,
     role,
+    display_name: displayName,
   })
 
   if (staffError) {

@@ -27,6 +27,40 @@ export default async function AdminDashboardPage() {
           </p>
         </div>
       </div>
+
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold text-gray-900">Ανά σερβιτόρο</h2>
+        {analytics.byStaff.length === 0 ? (
+          <p className="mt-2 text-sm text-gray-500">Δεν υπάρχει ακόμα προσωπικό.</p>
+        ) : (
+          <table className="mt-3 w-full max-w-2xl text-sm">
+            <thead>
+              <tr className="text-left text-gray-500">
+                <th className="py-2 font-medium">Όνομα</th>
+                <th className="py-2 font-medium">Ρόλος</th>
+                <th className="py-2 font-medium">Κλήσεις που ολοκλήρωσε</th>
+                <th className="py-2 font-medium">Μέσος χρόνος</th>
+              </tr>
+            </thead>
+            <tbody>
+              {analytics.byStaff.map((stat) => (
+                <tr key={stat.staffId} className="border-t border-gray-200">
+                  <td className="py-2 text-gray-900">{stat.displayName}</td>
+                  <td className="py-2 text-gray-600">
+                    {stat.role === 'admin' ? 'Διαχειριστής' : 'Σερβιτόρος'}
+                  </td>
+                  <td className="py-2 text-gray-900">{stat.handledCount}</td>
+                  <td className="py-2 text-gray-900">
+                    {stat.averageResolutionMinutes === null
+                      ? '—'
+                      : `${stat.averageResolutionMinutes.toFixed(1)} λεπτά`}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </main>
   )
 }

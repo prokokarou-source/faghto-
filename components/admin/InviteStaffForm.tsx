@@ -24,6 +24,15 @@ export function InviteStaffForm() {
     <div className="mt-6">
       <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-2">
         <div>
+          <label className="block text-sm text-gray-700">Όνομα</label>
+          <input
+            name="displayName"
+            type="text"
+            required
+            className="rounded border border-gray-300 px-3 py-2"
+          />
+        </div>
+        <div>
           <label className="block text-sm text-gray-700">Email</label>
           <input
             name="email"
